@@ -1,9 +1,9 @@
 ---
 # The hooks are run every time a ` git commit -m "blah" ` is run.
-# Usage instructions: https://interrupt.memfault.com/blog/pre-commit#using-pre-commit
+# Usage instructions:
 
 # exclude the click file b/c it can't be docstringed correctly
-exclude: hello.py
+# exclude: 'hello.py'
 
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
