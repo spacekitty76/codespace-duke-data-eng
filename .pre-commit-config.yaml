@@ -2,9 +2,6 @@
 # The hooks are run every time a ` git commit -m "blah" ` is run.
 # Usage instructions:
 
-# exclude the click file b/c it can't be docstringed correctly
-# exclude: 'hello.py'
-
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
@@ -13,11 +10,20 @@ repos:
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
     -   id: requirements-txt-fixer
--   repo: https://github.com/psf/black
-    rev: 19.3b0
+# Run pylint and black locally otherwise there's annoying import errors and it tries to docstring things that @click cannot docstring
+-   repo: local
+    hooks:
+    -   id: pylint
+        name: pylint
+        entry: pylint --disable=R,C
+        language: system
+        types: [python]
+        require_serial: true
+-   repo: local
     hooks:
     -   id: black
-- repo: https://github.com/PyCQA/pylint
-  rev: v2.12.2
-  hooks:
-    - id: pylint
+        name: black
+        entry: black .
+        language: system
+        types: [python]
+        require_serial: true
